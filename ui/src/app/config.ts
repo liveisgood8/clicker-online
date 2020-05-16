@@ -1,2 +1,2 @@
-export const socketHost = 'http://nexus-craft.ddns.net';
+export const socketHost = 'https://clicker-online.herokuapp.com/';
 export const socketReduxCriteria = 'game-socket/';

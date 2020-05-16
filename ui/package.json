@@ -47,7 +47,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://liveisgood8.github.io/clicker-online",
   "devDependencies": {
     "@types/react-router-dom": "^5.1.5",
     "@types/redux-socket.io": "^1.4.0",
