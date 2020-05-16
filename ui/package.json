@@ -28,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,8 +47,10 @@
       "last 1 safari version"
     ]
   },
+  "homepage": "http://liveisgood8.github.io/clicker-online",
   "devDependencies": {
     "@types/react-router-dom": "^5.1.5",
-    "@types/redux-socket.io": "^1.4.0"
+    "@types/redux-socket.io": "^1.4.0",
+    "gh-pages": "^2.2.0"
   }
 }

@@ -1,2 +1,2 @@
-export const socketHost = 'http://192.168.0.15:8080';
+export const socketHost = 'http://nexus-craft.ddns.net';
 export const socketReduxCriteria = 'game-socket/';
