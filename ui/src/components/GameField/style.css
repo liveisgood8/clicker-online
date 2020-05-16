@@ -1,0 +1,28 @@
+#field-container {
+  width: 75%;
+}
+
+@media only screen and (max-width: 600px)  {
+  #field-container {
+    width: 100%;
+  }
+}
+
+.cell {
+  border: 1px solid gray;
+  padding: 0;
+}
+
+.clicked {
+  background: lightgreen;
+}
+
+.disabled {
+  background: rgba(128, 128, 128, 0.3);
+}
+
+.cell:before {
+  content: "";
+  float: left;
+  padding-top: 100%;
+}
