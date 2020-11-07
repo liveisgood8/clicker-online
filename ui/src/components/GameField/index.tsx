@@ -1,4 +1,5 @@
 import './style.css';
+import fieldImage from './field.png';
 
 import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
@@ -28,13 +29,15 @@ export const GameField: React.FC<IGameFieldProps> = (props) => {
         const index = i * props.fieldSize + j;
         rowCells.push((
           <Col
-            className={'cell' + (props.clickedCells.indexOf(index) !== -1 ? ' clicked' : '')}
+            className={'d-flex align-items-center justify-content-center cell' +
+              (props.clickedCells.indexOf(index) !== -1 ? ' clicked' : '')}
             key={j}
             onClick={() => onCellClick(index)}
           >
             <img
-              src="https://pngimage.net/wp-content/uploads/2018/05/dick-png-16.png"
-              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              src={fieldImage}
+              alt=""
+              style={{ maxWidth: '50%', maxHeight: '50%' }}
             />
           </Col>
         ));
