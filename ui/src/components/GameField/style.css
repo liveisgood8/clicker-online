@@ -8,17 +8,28 @@
   }
 }
 
+
 .cell {
-  border: 1px solid gray;
+  cursor: pointer;
+  border: 1px solid #f0efef;
   padding: 0;
+  margin: 0.2rem;
+  border-radius: 4px;
+  box-shadow: 2px 2px 3px 0px rgba(34, 60, 80, 0.05);
+  transition: background-color 150ms ease-in-out;
+}
+
+.cell:hover {
+  background-color: #e7e7e7;
+}
+
+.disabled .cell {
+  cursor: not-allowed;
+  background-color: #e7e7e7;
 }
 
 .clicked {
-  background: lightgreen;
-}
-
-.disabled {
-  background: rgba(128, 128, 128, 0.3);
+  background: lightgreen !important;
 }
 
 .cell:before {

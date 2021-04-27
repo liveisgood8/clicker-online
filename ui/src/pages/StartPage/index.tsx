@@ -1,11 +1,13 @@
 import React, { useState, Fragment, FormEvent } from 'react';
 import { Button, Form, Modal, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { createRoomAction, connectToRoomAction } from '../../features/Game/actions';
+import { createRoomAction, connectToRoomAction, resetRoomExistAction } from '../../features/Game/actions';
 import { RootState } from '../../app/store';
+import { Logo } from '../../components/Logo';
 
+const LOCAL_STORAGE_NAME_KEY = 'name';
 export const StartPage: React.FC = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(localStorage.getItem(LOCAL_STORAGE_NAME_KEY) ?? '');
   const [showRoomModal, setShowRoomModal] = useState(false);
   const [isNameErrorVisible, setNameErrorVisible] = useState(false);
   const [roomId, setRoomId] = useState(0);
@@ -16,6 +18,7 @@ export const StartPage: React.FC = () => {
     if (!validateName()) {
       return;
     }
+    localStorage.setItem(LOCAL_STORAGE_NAME_KEY, name);
     dispatch(createRoomAction(name));
   };
 
@@ -46,36 +49,34 @@ export const StartPage: React.FC = () => {
 
   return (
     <Fragment>
-      <h2 className="text-secondary mb-5">Clicker online</h2>
+      <Logo />
       <Form.Control
+        value={name}
         onChange={(e) => setName(e.currentTarget.value)}
-        className="mb-5"
-        placeholder="Введи имя"
+        placeholder="Enter your name"
         required
       />
       {isNameErrorVisible && (
-        <Alert key="1" variant="danger" className="w-100">
-          Нужно заполнить имя для начала игры!
+        <Alert key="1" variant="danger" className="mt-2 w-100">
+          Oops, you must enter your name for begginning!
         </Alert>
       )}
-      <Button className="d-block m-2 w-100" size="lg" onClick={onCreateRoom}>
-        Создать комнату
+      <Button className="d-block m-2 mt-5 w-100" size="lg" onClick={onCreateRoom}>
+        Create room
       </Button>
       <Button className="d-block m-2 w-100" size="lg" onClick={onClickConnectToRoom}>
-        Подключить к комнате
+        Connect to room
       </Button>
       <Modal
         show={showRoomModal}
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        onHide={() => setShowRoomModal(false)}
+        onHide={() => {
+          dispatch(resetRoomExistAction());
+          setShowRoomModal(false);
+        }}
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Подключение к комнате
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="my-3">
           <Form onSubmit={(e: FormEvent) => {
             e.preventDefault();
             onConnectToRoom();
@@ -83,11 +84,11 @@ export const StartPage: React.FC = () => {
             <Form.Control
               className="mb-3"
               onChange={(e) => setRoomId(+e.currentTarget.value)}
-              placeholder="Введите идентификатор комнаты"
+              placeholder="Enter room identifier"
               required
             />
-            {isRoomNotExist && <h6 className="text-danger">Комната не существует</h6>}
-            <Button type="submit" variant="success">Подключиться</Button>
+            {isRoomNotExist && <Alert variant="danger">Room not exists</Alert>}
+            <Button className="w-100" type="submit" variant="success">Connect</Button>
           </Form>
         </Modal.Body>
       </Modal>

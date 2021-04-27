@@ -5,6 +5,7 @@ import { GameField } from '../../components/GameField';
 import { sendTurnAction, turnDoneAction, repeatGameAction, leaveFromRoomAction } from './actions';
 import { Modal, Button } from 'react-bootstrap';
 import { push } from 'connected-react-router';
+import { Logo } from '../../components/Logo';
 
 export const Game: React.FC = () => {
   const gameState = useSelector((state: RootState) => state.game);
@@ -32,18 +33,13 @@ export const Game: React.FC = () => {
         centered
         onHide={onGameFinish}
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Игра завершена
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="my-3">
           <div className="mb-3">
-            <h6 className="d-inline text-secondary">Игра закончена, победил: </h6>
+            <h6 className="d-inline text-secondary">Game ended, winner: </h6>
             <h5 className="d-inline text-primary font-weight-bold">{gameState.winner}</h5>
           </div>
-          <Button variant="success" className="mr-2" onClick={onWantRepeat}>Хочу еще</Button>
-          <Button variant="danger" onClick={onGameFinish}>Выйти</Button>
+          <Button className="w-100 mb-2" variant="success" onClick={onWantRepeat}>Want more</Button>
+          <Button className="w-100" variant="outline-danger" onClick={onGameFinish}>Exit</Button>
         </Modal.Body>
       </Modal>
     );
@@ -57,14 +53,9 @@ export const Game: React.FC = () => {
         centered
         onHide={onGameFinish}
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Игра завершена
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h5>Твой соперник отключился</h5>
-          <Button variant="success" onClick={onGameFinish}>Выйти</Button>
+        <Modal.Body className="my-3">
+          <h6 className="mb-3">Game ended, because your opponent disconnected</h6>
+          <Button className="w-100" variant="outline-danger" onClick={onGameFinish}>Exit</Button>
         </Modal.Body>
       </Modal>
     );
@@ -72,11 +63,12 @@ export const Game: React.FC = () => {
 
   return (
     <Fragment>
-      <div className="mb-5">
-        <h5 className="d-inline text-secondary">Идентификатор комнаты: </h5>
+      <div className="mb-5 text-center">
+        <Logo />
+        <h5 className="d-inline text-secondary">Room identifier: </h5>
         <h4 className="d-inline text-primary font-weight-bold">{gameState.roomId}</h4>
         {gameState.isWaitingEnemy && (
-          <h6 className="text-center text-primary font-weight-bold">Ждем твоего соперника...</h6>
+          <h6 className="text-center text-primary font-weight-bold">Waiting your opponent...</h6>
         )}
       </div>
       <GameField

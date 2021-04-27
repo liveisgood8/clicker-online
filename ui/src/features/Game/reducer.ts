@@ -10,6 +10,7 @@ import {
   gameStartedAction,
   repeatGameAction,
   roomNotExistAction,
+  resetRoomExistAction,
 } from './actions';
 import { IGameState } from './types';
 
@@ -26,6 +27,10 @@ const initialState: IGameState = {
 
 export const gameReducer = createReducer<IGameState>(initialState, (builder) => {
   builder
+    .addCase(resetRoomExistAction, (state) => ({
+      ...state,
+      isRoomNotExist: false,
+    }))
     .addCase(roomNotExistAction, (state) => ({
       ...state,
       isRoomNotExist: true,

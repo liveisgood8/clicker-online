@@ -36,7 +36,7 @@ export const GameField: React.FC<IGameFieldProps> = (props) => {
           >
             <img
               src={fieldImage}
-              alt=""
+              alt="field"
               style={{ maxWidth: '50%', maxHeight: '50%' }}
             />
           </Col>

@@ -28,7 +28,7 @@ const App: React.SFC = () => {
 
   return (
     <ConnectedRouter history={history}>
-      <main className="h-100">
+      <main className="h-100 overflow-hidden">
         <Row className="h-100">
           <Col
             className="d-flex align-items-center justify-content-center flex-column h-100"

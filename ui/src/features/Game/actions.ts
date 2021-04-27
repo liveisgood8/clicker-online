@@ -34,6 +34,7 @@ interface TurnAction {
   enemyTurnIndex?: number;
 }
 
+export const resetRoomExistAction = createAction('@internal/resetRootExist');
 export const roomNotExistAction = createAction(IncomeCommands.ROOM_NOT_EXIST);
 export const connectedAction = createAction<ConnectedAction>(IncomeCommands.ROOM_CONNECTED);
 export const gameStartedAction = createAction(IncomeCommands.ROOM_GAME_STARTED);
